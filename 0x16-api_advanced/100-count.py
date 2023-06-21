@@ -31,7 +31,7 @@ def sort_histogram(histogram={}):
         print(res_str)
 
 
-def count_words(subreddit, word_list, histogram=[], n=0, after=None):
+def count_words(subreddit, word_list, histogram=None, n=0, after=None):
     '''Counts the number of times each word in a given wordlist
     occurs in a given subreddit.
     '''
@@ -59,7 +59,7 @@ def count_words(subreddit, word_list, histogram=[], n=0, after=None):
         headers=api_headers,
         allow_redirects=False
     )
-    if not histogram:
+    if histogram is None:
         word_list = list(map(lambda word: word.lower(), word_list))
         histogram = list(map(lambda word: (word, 0), word_list))
     if res.status_code == 200:
@@ -74,7 +74,7 @@ def count_words(subreddit, word_list, histogram=[], n=0, after=None):
             histogram
         ))
         if len(posts) >= limit and data['after']:
-            count_words(
+            histogram = count_words(
                 subreddit,
                 word_list,
                 histogram,
@@ -84,4 +84,6 @@ def count_words(subreddit, word_list, histogram=[], n=0, after=None):
         else:
             sort_histogram(histogram)
     else:
-        return
+        histogram = []
+    return histogram
+
