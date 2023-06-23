@@ -17,11 +17,9 @@ server {
     }
 
     # Serve /number_odd_or_even/ route on AirBnB_clone_v2
-    # The regex route below, ~ indicates the link is case sensitive and ^
-    # indicates user can specify html doctype.
-	location ~ ^/airbnb-dynamic/number_odd_or_even/([0-9]+)$ {
-		proxy_pass http://0.0.0.0:5001/number_odd_or_even/$1;
-	        }
+    location ~ /airbnb-dynamic/number_odd_or_even/(\d+)$ {
+        proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
+     }
 
     # 404 error page
     error_page 404 /404.html;
