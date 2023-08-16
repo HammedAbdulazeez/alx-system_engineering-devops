@@ -2,7 +2,7 @@ server {
         listen 80;
         listen [::]:80;
         add_header X-Served-By 99440-web-01;
-        server_name 52.86.171.222;
+        server_name 3.84.238.9;
 
         root /var/www/html;
         index index.html;
